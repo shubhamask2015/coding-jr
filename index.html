@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-in">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Jr.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="brand">
+                <img src="https://codingjr.school/uploads/system/coding_jr/logo-dark.png" alt="CodingJr">
+            </div>
+            <ul class="bread-crumb">
+                <li><a href="#">Class 12</a><i class="fas fa-angle-right"></i></li>
+                <li><a href="#">Web development</a><i class="fas fa-angle-right"></i></li>
+                <li><a href="#">HTML</a></li>
+            </ul>
+            <div class="user">
+                <i class="fas fa-user"></i>
+            </div>
+            
+            <div class="dropdown">
+                <button id="user-drp">Vikash <i class="fas fa-caret-down"></i></button>
+                <div class="dropdown-content" id="drp-cnt">
+                    <div class="item">Visit Link #1</div>
+                    <div class="item">Visit Link #2</div>
+                    <div class="item">Visit Link #3</div>
+                    <div class="item">Visit Link #4</div>
+                </div>
+            </div>
+            <i class="fas fa-bars" onclick="sideNavRight()" id="nav-fa-bar"></i>
+            <i class="fas fa-times" id="nav-fa-times" onclick="sideNavRight()"></i>
+        </nav>
+        <main>
+            <div class="left">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit itaque reiciendis explicabo voluptates sint. Fugiat veniam aliquid accusamus veritatis maiores inventore ut neque, temporibus impedit, quod magnam obcaecati fuga sequi.
+            </div>
+            <div class="right" id="nav-right">
+                <!-- First Acordian -->
+                <div class="acordian">
+                    <div class="title" id="drp-dwn-btn-1" onclick="toggleContent('drp-dwn-btn-1', 'drp-dwn-1')"><h4>Introduction to HTML</h4><i class="fas fa-caret-down"></i></div>
+                    <div class="content" id="drp-dwn-1">
+                        <div class="title" onclick="toggleContent('drp-dwn-btn-1', 'drp-dwn-1')">
+                            <h4>Introduction to HTML</h4><i class="fas fa-caret-up"></i>
+                        </div>
+                        <!-- Vide -->
+                        <div class="sub-title">
+                            <div class="p1">
+                                <i class="far fa-play-circle"></i>
+                                <p>Video:</p>
+                            </div>
+                            <div class="p2">
+                                <i class="fas fa-check-circle"></i>
+                                <p>5:00</p>
+                            </div>
+                        </div>
+                        <!-- PPT -->
+                        <div class="sub-title">
+                            <div class="p1" style="padding-left: 3px;">
+                                <i class="fas fa-file-powerpoint"></i>
+                                <p>PPT:</p>
+                            </div>
+                            <div class="p2">
+                                <i class="fas fa-check-circle"></i>
+                                <p>3:30</p>
+                            </div>
+                        </div>
+                        <!-- Notes -->
+                        <div class="sub-title">
+                            <div class="p1" style="padding-left: 3px;">
+                                <i class="fas fa-file-alt"></i>
+                                <p>Notes:</p>
+                            </div>
+                            <div class="p2">
+                                <p>2:00</p>
+                            </div>
+                        </div>
+                        <!-- Quize -->
+                        <div class="sub-title">
+                            <div class="p1">
+                                <i class="far fa-question-circle"></i>
+                                <p>Quiz:</p>
+                            </div>
+                            <div class="p2">
+                                <p>7:15</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secoend Acordian -->
+                <div class="acordian">
+                    <div class="title" id="drp-dwn-btn-2" onclick="toggleContent('drp-dwn-btn-2', 'drp-dwn-2')"><h4>Adding Images, Videos and Tables</h4><i class="fas fa-caret-down"></i></div>
+                    <div class="content" id="drp-dwn-2">
+                        <div class="title" onclick="toggleContent('drp-dwn-btn-2', 'drp-dwn-2')">
+                            <h4>Adding Images, Videos and Tables</h4><i class="fas fa-caret-up"></i>
+                        </div>
+                        <!-- Vide -->
+                        <div class="sub-title">
+                            <div class="p1">
+                                <i class="far fa-play-circle"></i>
+                                <p>Video: Adding Images</p>
+                            </div>
+                            <div class="p2">
+                                <i class="fas fa-check-circle"></i>
+                                <p>5:00</p>
+                            </div>
+                        </div>
+                        <!-- PPT -->
+                        <div class="sub-title">
+                            <div class="p1" style="padding-left: 3px;">
+                                <i class="fas fa-file-powerpoint"></i>
+                                <p>PPT: Adding Images</p>
+                            </div>
+                            <div class="p2">
+                                <i class="fas fa-check-circle"></i>
+                                <p>3:30</p>
+                            </div>
+                        </div>
+                        <!-- Notes -->
+                        <div class="sub-title">
+                            <div class="p1" style="padding-left: 3px;">
+                                <i class="fas fa-file-alt"></i>
+                                <p>Notes: Adding Images</p>
+                            </div>
+                            <div class="p2">
+                                <p>2:00</p>
+                            </div>
+                        </div>
+                        <!-- Quize -->
+                        <div class="sub-title">
+                            <div class="p1">
+                                <i class="far fa-question-circle"></i>
+                                <p>Quiz: Adding Images</p>
+                            </div>
+                            <div class="p2">
+                                <p>7:15</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        let btn = document.getElementById('user-drp');
+        let dropdownContent = document.getElementById('drp-cnt');
+        btn.addEventListener('click',()=>{
+            if(dropdownContent.style.display == 'block'){
+                dropdownContent.style.display = 'none'
+            }else{
+                dropdownContent.style.display = 'block'
+            }
+        });
+
+        //Accordian Content hide - display
+        function toggleContent(btnId, dropdownId) {
+            const drpBtn = document.getElementById(btnId);
+            const contentElement = document.getElementById(dropdownId);
+            if (contentElement.style.display === 'none') {
+                contentElement.style.display = 'block';
+                drpBtn.style.display = 'none';
+            } else {
+                contentElement.style.display = 'none';
+                drpBtn.style.display = 'flex';
+            }
+        }
+
+        //Right sidebar show - hide
+        function sideNavRight(){
+            const faBtnBars = document.getElementById('nav-fa-bar')
+            const faBtnCross  = document.getElementById('nav-fa-times')
+            const rightNav = document.getElementById('nav-right')
+
+            if(faBtnCross.style.display == 'none'){
+                faBtnCross.style.display = 'block'
+                faBtnBars.style.display = 'none'
+                rightNav.style.display = 'block'
+            }else{
+                faBtnCross.style.display = 'none'
+                faBtnBars.style.display = 'block'
+                rightNav.style.display = 'none'
+            }
+        }
+    </script>
+</body>
+</html>
