@@ -183,6 +183,76 @@ main .right{
     color: #00B836;
 }
 
+.left .img-top{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem;
+}
+
+.left .img-top .end{
+    display: flex;
+    gap: 1rem;
+}
+
+.left .img-top .fa-file-pdf{
+    color: red;
+}
+
+.left .img-top .end{
+    color: #bbb;
+}
+
+.left .img-top .middle p span{
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.left .img-container{
+    display: flex;
+    background-color: #eee;
+}
+
+.left i, .left button{
+    cursor: pointer;
+}
+.left .img-container .p0{
+    height: fit-content;
+    border-radius: 2px;
+    margin: 1rem 0.4rem;
+    padding: 0.4rem 0.55rem;
+    font-size: 0.7rem;
+    color: #FFF;
+    background-color: #0072EE;
+}
+
+.left .img-container .p1 img{
+    width: 95%;
+}
+
+.left .img-container .p2{
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: #FFF;
+    color: #777;
+    padding: 0.5rem 1rem;
+}
+
+.left .img-container .p2 span{
+    font-size: 0.7rem;
+}
+
+.left .img-container .p2 button{
+    padding: 0.05rem 0.25rem;
+}
+
+.left .img-container .p2-inner{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+/* Media Queries */
 @media screen and (max-width : 1240px){
     .container{
         margin: 0 0;
@@ -212,6 +282,26 @@ main .right{
     
 }
 
+@media screen and (max-width:776px) {
+    nav{
+        position: relative;
+    }
+
+    .brand{
+        border-right:none;
+    }
+
+    nav .bread-crumb{
+        position: absolute;
+        top: 4.5rem;
+        left: 2rem;
+    }
+
+    .container .left{
+        padding: 2rem;
+    }
+}
+
 @media screen and (max-width:578px) {
     
     main .right{
@@ -226,12 +316,25 @@ main .right{
         width: 100%;
     }
 
+    .brand{
+        border-right:none;
+    }
+
     .bread-crumb{
-        display: none;
+        margin-left: -1rem;
+        font-size: 0.8rem;
     }
     
     nav{
-        padding: 1.25rem 0.25rem;
+        padding: 1.25rem 0.5rem;
+    }
+    .container .left{
+        padding: 1rem;
+    }
+
+    .content .sub-title{
+        display: flex;
+        padding: 0 0.5rem;
+        line-height: 4rem;
     }
 }
-
