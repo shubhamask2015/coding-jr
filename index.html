@@ -52,16 +52,17 @@
                             <i class="fas fa-mouse-pointer"></i>
                         </div>
                         <div class="p1">
-                            <img src="https://i.pinimg.com/originals/f3/38/dd/f338dde47c7e6f845f3e9ae1def5bcfd.jpg" alt="Thumbnail">
+                            <!-- <img src="https://i.pinimg.com/originals/f3/38/dd/f338dde47c7e6f845f3e9ae1def5bcfd.jpg" alt="Thumbnail"> -->
+                            <canvas id="pdf-canvas"></canvas>
                         </div>
                         <div class="p2">
                             <i class="fas fa-th-large"></i>
                             <div class="p2-inner">
                                 <i class="fas fa-expand"></i>
-                                <button>1</button>
-                                <span>27</span>
-                                <i class="fas fa-angle-up" style="color: #ccc;"></i>
-                                <i class="fas fa-angle-down"></i>
+                                <button id="current-page">1</button>
+                                <span id="total-page">27</span>
+                                <i class="fas fa-angle-up" style="color: #ccc;" id="next-page"></i>
+                                <i class="fas fa-angle-down" id="prev-page"></i>
                                 <i class="fas fa-file-code"></i>
                                 <i class="fas fa-search-plus"></i>
                                 <i class="fas fa-search-minus"></i>
@@ -181,12 +182,93 @@
                 </div>
             </div>
         </main>
+        <div class="pdf-viewer">
+            <div class="canvas-container">
+                
+            </div>
+        </div>
     </div>
-    
+    <!-- PDF Js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <!-- JQuery & Javascripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Pdf rRendering -->
     <script>
-        let btn = document.getElementById('user-drp');
-        let dropdownContent = document.getElementById('drp-cnt');
-        btn.addEventListener('click',()=>{
+        const canvas = document.getElementById('pdf-canvas');
+        let pdfInfo = {
+            pdf:null,
+            scale:0.53,
+            currentPage:3,
+            pendingPageNum:null,
+            ctx:canvas.getContext('2d'),
+            pageRendring:false,
+
+        };
+
+        function renderPage(num){
+            pdfInfo.pageRendring = true;
+            pdfInfo.currentPage = num;
+            pdfInfo.pdf.getPage(pdfInfo.currentPage).then(page =>{
+                let viewport = page.getViewport({scale:pdfInfo.scale});
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                //Rendering Page
+                let renderContext ={
+                    canvasContext:pdfInfo.ctx,
+                    viewport:viewport,
+                }
+
+                page.render(renderContext).promise.then(()=>{
+                    pdfInfo.pageRendring = false;
+                    if(pdfInfo.pendingPageNum != null){
+                        renderPage()
+                        pdfInfo.pendingPageNum = null;
+                    }
+                })
+            });
+        };
+
+        //Previos and Next Pages Handler
+        function pageRenderQ(num){
+            if(pdfInfo.pageRendring){
+                pdfInfo.pendingPageNum = num;
+            }
+            else{
+                renderPage(num);
+            }
+        }
+
+        function nextPage(){
+            if(pdfInfo.currentPage >= pdfInfo.pdf.numPages) return
+            pdfInfo.currentPage++;
+            pageRenderQ(pdfInfo)
+
+        }
+        
+        pdfjsLib.getDocument('htmlTutorial.pdf').promise.then(pdf => {
+            pdfInfo.pdf = pdf;
+            console.log(pdf._pdfInfo.numPages)
+            $('#total-page').text(pdf._pdfInfo.numPages);
+            $('#current-page').text(pdfInfo.currentPage)
+
+           renderPage(pdfInfo.currentPage)
+        });
+    </script>
+
+    <!-- PDF Navigation -->
+    <script>
+        $('#next-page').click(()=>{
+            alert('hi')
+        });
+    </script>
+
+    <!-- Handels Button clicks -->
+    <script>
+        let btn = $('#user-drp');
+        let dropdownContent = $('#drp-cnt');
+        btn.click(()=>{
             if(dropdownContent.style.display == 'block'){
                 dropdownContent.style.display = 'none'
             }else{
