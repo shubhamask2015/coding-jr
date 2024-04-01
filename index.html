@@ -213,7 +213,7 @@
 
             //pdf-nav styles
             if(pdfInfo.currentPage > 1) $('#prev-page').css('color', '#777');
-            if(pdfInfo.currentPage < pdfInfo.totalPages) $('#next-page', '#777');
+            if(pdfInfo.currentPage < pdfInfo.totalPages) $('#next-page').css('color', '#777');
             pdfInfo.pdf.getPage(pdfInfo.currentPage).then(page =>{
                 let viewport = page.getViewport({scale:pdfInfo.scale});
                 canvas.height = viewport.height;
@@ -267,12 +267,18 @@
         //page zoom-in zoom-out
         function zoomIn(){
             let zoom = pdfInfo.scale - 0.1;
-            if(zoom > 0) pageRenderQ(pdfInfo.currentPage);
+            if(zoom > 0){
+                pdfInfo.scale = zoom;
+                pageRenderQ(pdfInfo.currentPage);
+            }
         }
 
         function zoomOut(){
             let zoom = pdfInfo.scale + 0.1;
-            if(zoom < 1) pageRenderQ(pdfInfo.currentPage);
+            if(zoom < 1){
+                pdfInfo.scale = zoom;
+                pageRenderQ(pdfInfo.currentPage);
+            }
         }
         
         //Initial Page Renderer
