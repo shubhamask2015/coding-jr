@@ -199,7 +199,7 @@
         let pdfInfo = {
             pdf:null,
             scale:0.53,
-            currentPage:3,
+            currentPage:1,
             pendingPageNum:null,
             ctx:canvas.getContext('2d'),
             pageRendring:false,
@@ -228,7 +228,8 @@
                     }
                 })
             });
-        };
+            $('#current-page').text(pdfInfo.currentPage);
+        }
 
         //Previos and Next Pages Handler
         function pageRenderQ(num){
@@ -255,7 +256,6 @@
             pdfInfo.pdf = pdf;
             console.log(pdf._pdfInfo.numPages)
             $('#total-page').text(pdf._pdfInfo.numPages);
-            $('#current-page').text(pdfInfo.currentPage)
 
            renderPage(pdfInfo.currentPage)
         });
@@ -267,7 +267,9 @@
             nextPage();
         });
 
-        $('#prev-page').click(prevPage);
+        $('#prev-page').click(()=>{
+            prevPage();
+        });
     </script>
 
     <!-- Handels Button clicks -->
