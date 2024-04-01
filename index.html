@@ -198,7 +198,7 @@
         const canvas = document.getElementById('pdf-canvas');
         let pdfInfo = {
             pdf:null,
-            scale:0.53,
+            scale:0.51,
             currentPage:1,
             pendingPageNum:null,
             totalPages:0,
@@ -266,7 +266,7 @@
 
         //page zoom-in zoom-out
         function zoomIn(){
-            let zoom = pdfInfo.scale - 0.1;
+            let zoom = pdfInfo.scale - 0.02;
             if(zoom > 0){
                 pdfInfo.scale = zoom;
                 pageRenderQ(pdfInfo.currentPage);
@@ -274,11 +274,15 @@
         }
 
         function zoomOut(){
-            let zoom = pdfInfo.scale + 0.1;
+            let zoom = pdfInfo.scale + 0.02;
             if(zoom < 1){
                 pdfInfo.scale = zoom;
                 pageRenderQ(pdfInfo.currentPage);
             }
+        }
+
+        function pdfZoom(scl){
+            pdfInfo.scale = scl;
         }
         
         //Initial Page Renderer
@@ -288,7 +292,16 @@
             console.log(pdf._pdfInfo.numPages)
             $('#total-page').text(pdfInfo.totalPages);
 
-           renderPage(pdfInfo.currentPage)
+            //checks for mobile devices
+            let page = pdfInfo.currentPage??1;
+            const mobileDevices = window.matchMedia('(max-width:578px)');
+            if(mobileDevices.matches){
+                pdfZoom(0.2, page);
+            }
+            else{
+                renderPage(pdfInfo.currentPage)
+            }
+            
         });
     </script>
 
@@ -352,6 +365,29 @@
                 rightNav.style.display = 'none'
             }
         }
+    </script>
+
+    <!-- Media Queries -->
+    <script>
+        /*const mobileDevices = window.matchMedia('(max-width:578px)');
+        if(mobileDevices.matches){
+            pdfZoom(0.2, page);
+        }*/
+
+        window.addEventListener('resize', ()=>{
+            let scrWidth = window.innerWidth;
+            if(scrWidth <= 578){
+                pdfZoom(0.2);
+            }
+            else if(scrWidth <= 778){
+                pdfZoom(0.4);
+            }
+            else{
+                pdfZoom(0.51);
+            }
+
+            renderPage(pdfInfo.currentPage);
+        })
     </script>
 </body>
 </html>
