@@ -241,10 +241,9 @@
         }
 
         function nextPage(){
-            if(pdfInfo.currentPage >= pdfInfo.pdf.numPages) return
-            pdfInfo.currentPage++;
-            pageRenderQ(pdfInfo)
-
+            let nextPageNum = pdfInfo.currentPage;
+            if( nextPageNum > pdfInfo.pdf.numPages) return;
+            pageRenderQ(nextPageNum);
         }
         
         pdfjsLib.getDocument('htmlTutorial.pdf').promise.then(pdf => {
@@ -260,7 +259,7 @@
     <!-- PDF Navigation -->
     <script>
         $('#next-page').click(()=>{
-            alert('hi')
+            nextPage();
         });
     </script>
 
