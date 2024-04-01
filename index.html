@@ -58,7 +58,7 @@
                         <div class="p2">
                             <i class="fas fa-th-large"></i>
                             <div class="p2-inner">
-                                <i class="fas fa-expand"></i>
+                                <div id="full-screen"><i class="fas fa-expand"></i></div>
                                 <button id="current-page">1</button>
                                 <span id="total-page">27</span>
                                 <i class="fas fa-angle-up" id="next-page"></i>
@@ -228,7 +228,7 @@
                 page.render(renderContext).promise.then(()=>{
                     pdfInfo.pageRendring = false;
                     if(pdfInfo.pendingPageNum != null){
-                        renderPage()
+                        renderPage(pdfInfo.pendingPageNum)
                         pdfInfo.pendingPageNum = null;
                     }
                 })
@@ -296,10 +296,11 @@
             let page = pdfInfo.currentPage??1;
             const mobileDevices = window.matchMedia('(max-width:578px)');
             if(mobileDevices.matches){
-                pdfZoom(0.2, page);
+                pdfZoom(0.2);
+                renderPage(pdfInfo.currentPage);
             }
             else{
-                renderPage(pdfInfo.currentPage)
+                renderPage(pdfInfo.currentPage);
             }
             
         });
@@ -326,43 +327,57 @@
 
     <!-- Handels Button clicks -->
     <script>
+        //Full screen handling
+        $(document).ready(function() {
+            $("#full-screen").click(function() {
+              if (!document.fullscreenElement) {
+                $("#full-screen").css({'color':'red', 'font-weight':'bolder'});
+                document.documentElement.requestFullscreen();
+              } else {
+                $("#full-screen").css('color','#333');
+                document.exitFullscreen();
+              }
+            });
+          });
+
+        //user dropdown menue
         let btn = $('#user-drp');
         let dropdownContent = $('#drp-cnt');
         btn.click(()=>{
-            if(dropdownContent.style.display == 'block'){
-                dropdownContent.style.display = 'none'
+            if(dropdownContent.css('display') == 'block'){
+                dropdownContent.css('display', 'none');
             }else{
-                dropdownContent.style.display = 'block'
+                dropdownContent.css('display', 'block');
             }
         });
 
         //Accordian Content hide - display
         function toggleContent(btnId, dropdownId) {
-            const drpBtn = document.getElementById(btnId);
-            const contentElement = document.getElementById(dropdownId);
-            if (contentElement.style.display === 'none') {
-                contentElement.style.display = 'block';
-                drpBtn.style.display = 'none';
+            const drpBtn = $(`#${btnId}`);
+            const contentElement = $(`#${dropdownId}`);
+            if (contentElement.css('display') == 'none') {
+                contentElement.css('display', 'block');
+                drpBtn.css('display', 'none');
             } else {
-                contentElement.style.display = 'none';
-                drpBtn.style.display = 'flex';
+                contentElement.css('display', 'none');
+                drpBtn.css('display', 'flex');
             }
         }
 
         //Right sidebar show - hide
         function sideNavRight(){
-            const faBtnBars = document.getElementById('nav-fa-bar')
-            const faBtnCross  = document.getElementById('nav-fa-times')
-            const rightNav = document.getElementById('nav-right')
+            const faBtnBars = $('#nav-fa-bar')
+            const faBtnCross  = $('#nav-fa-times')
+            const rightNav = $('#nav-right')
 
-            if(faBtnCross.style.display == 'none'){
-                faBtnCross.style.display = 'block'
-                faBtnBars.style.display = 'none'
-                rightNav.style.display = 'block'
+            if(faBtnCross.css('display') == 'none'){
+                faBtnCross.css('display', 'block');
+                faBtnBars.css('display','none');
+                rightNav.css('display', 'block');
             }else{
-                faBtnCross.style.display = 'none'
-                faBtnBars.style.display = 'block'
-                rightNav.style.display = 'none'
+                faBtnCross.css('display', 'none');
+                faBtnBars.css('display', 'block');
+                rightNav.css('display', 'none');
             }
         }
     </script>
