@@ -241,11 +241,16 @@
         }
 
         function nextPage(){
-            let nextPageNum = pdfInfo.currentPage;
+            let nextPageNum = pdfInfo.currentPage+1;
             if( nextPageNum > pdfInfo.pdf.numPages) return;
             pageRenderQ(nextPageNum);
         }
-        
+
+        function prevPage(){
+            let prevNum = pdfInfo.currentPage-1;
+            if(prvNum < 1) return;
+            pageRenderQ(prevNum);
+        }
         pdfjsLib.getDocument('htmlTutorial.pdf').promise.then(pdf => {
             pdfInfo.pdf = pdf;
             console.log(pdf._pdfInfo.numPages)
@@ -261,6 +266,8 @@
         $('#next-page').click(()=>{
             nextPage();
         });
+
+        $('#prev-page').click(prevPage);
     </script>
 
     <!-- Handels Button clicks -->
