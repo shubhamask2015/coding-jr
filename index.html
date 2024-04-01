@@ -249,7 +249,7 @@
 
         function prevPage(){
             let prevNum = pdfInfo.currentPage-1;
-            if(prvNum < 1) return;
+            if(prevNum < 1) return;
             pageRenderQ(prevNum);
         }
         pdfjsLib.getDocument('htmlTutorial.pdf').promise.then(pdf => {
