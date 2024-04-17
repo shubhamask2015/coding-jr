@@ -347,10 +347,11 @@ main .right{
 
 @media screen and (max-width:1090px) {
     main .right{
-        position: fixed;
+        position: absolute;
         z-index: 1;
         right: 0;
         width: 24rem;
+        height: 185%;
         display: none;
     }
 
@@ -395,10 +396,11 @@ main .right{
 @media screen and (max-width:578px) {
     
     main .right{
-        position: fixed;
+        position: absolute;
         z-index: 1;
         right: 0;
         width: 16rem;
+        height: 117%;
         display: none;
     }
 
